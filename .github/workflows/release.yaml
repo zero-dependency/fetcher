@@ -20,4 +20,4 @@ jobs:
       - run: |
           echo "//registry.npmjs.org/:_authToken="${{secrets.NPM_TOKEN}}"" > ~/.npmrc
         shell: sh
-      - run: pnpm publish
+      - run: pnpm publish --access public
