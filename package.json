@@ -1,0 +1,44 @@
+{
+  "name": "@zero-dependency/{{name}}",
+  "version": "0.0.0",
+  "type": "module",
+  "types": "./dist/index.d.ts",
+  "main": "./dist/index.umd.js",
+  "module": "./dist/index.es.js",
+  "exports": {
+    ".": {
+      "import": "./dist/index.es.js",
+      "require": "./dist/index.umd.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "homepage": "https://github.com/zero-dependency",
+  "license": "MIT",
+  "author": {
+    "name": "Vitalij Ryndin",
+    "email": "sys@crashmax.ru",
+    "url": "https://crashmax.ru"
+  },
+  "scripts": {
+    "dev": "vite build --watch",
+    "build": "vite build",
+    "test": "vitest",
+    "test:watch": "vitest --ui --watch --coverage",
+    "format": "prettier --write --ignore-unknown **",
+    "prepublishOnly": "pnpm build"
+  },
+  "devDependencies": {
+    "@crashmax/prettier-config": "^2.1.0",
+    "@crashmax/tsconfig": "^1.0.2",
+    "@types/node": "^18.11.9",
+    "@vitest/coverage-c8": "^0.25.2",
+    "@vitest/ui": "^0.25.2",
+    "jsdom": "^20.0.3",
+    "typescript": "^4.9.3",
+    "vite": "^3.2.4",
+    "vite-plugin-dts": "^1.7.1",
+    "vitest": "^0.25.2"
+  }
+}
