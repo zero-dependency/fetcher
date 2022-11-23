@@ -1,49 +1,56 @@
 import { METHODS } from './constants.js'
 import { FetcherError } from './fetcher-error.js'
 import { combineHeaders, combineURLs } from './helpers.js'
+import { Interceptor } from './interceptor.js'
 import type {
-  FetcherInit,
-  FetcherMethod,
   FetcherRequest,
-  RequestMethods
+  FetcherRequestInit,
+  FetcherRequestInitOptions,
+  FetcherRequestOptions
 } from './types.js'
 
 export class Fetcher {
-  get: FetcherMethod
-  post: FetcherMethod
-  put: FetcherMethod
-  patch: FetcherMethod
-  delete: FetcherMethod
+  private readonly interceptors = new Interceptor()
+
+  get: FetcherRequest
+  post: FetcherRequest
+  put: FetcherRequest
+  patch: FetcherRequest
+  delete: FetcherRequest
 
   constructor(
     private readonly baseURL: string,
-    private readonly baseInit?: FetcherInit
+    private readonly options?: FetcherRequestInitOptions
   ) {
     for (const method of METHODS) {
       // @ts-ignore
-      this[method.toLowerCase()] = (path: string, init?: FetcherRequest) => {
+      this[method.toLowerCase()] = (
+        path: string,
+        init?: FetcherRequestInit
+      ) => {
         return this.request(path, { ...init, method })
       }
     }
   }
 
-  extends(path: string, baseInit?: FetcherInit): Fetcher {
-    const { url, init } = this.fetcherParameters(path, baseInit)
+  get interceptor() {
+    return this.interceptors
+  }
+
+  extends(path: string, options?: FetcherRequestInitOptions): Fetcher {
+    const { url, init } = this.fetcherParameters(path, options)
     return new Fetcher(url, init)
   }
 
-  async request<T>(
-    path: string,
-    initRequest: FetcherRequest & { method: RequestMethods }
-  ): Promise<T> {
-    const { url, init } = this.fetcherParameters(path, initRequest)
-    return await fetcher<T>(url, init)
+  async request<T>(path: string, options?: FetcherRequestOptions) {
+    const { url, init } = this.fetcherParameters(path, options)
+    return (await this.interceptors.request(url, init)) as T
   }
 
-  private fetcherParameters(path: string, baseInit?: FetcherInit) {
+  private fetcherParameters(path: string, options?: FetcherRequestInitOptions) {
     const url = combineURLs(this.baseURL, path)
-    const headers = combineHeaders(this.baseInit?.headers!, baseInit?.headers!)
-    const init = { ...this.baseInit, ...baseInit, headers }
+    const headers = combineHeaders(this.options?.headers!, options?.headers!)
+    const init = { ...this.options, ...options, headers }
     return { url, init }
   }
 }
