@@ -1,6 +1,6 @@
 import { describe, expect, vi } from 'vitest'
-import { Fetcher } from '../src/index.js'
 import createFetchMock from 'vitest-fetch-mock'
+import { Fetcher } from '../src/index.js'
 
 interface Response {
   id: number
@@ -18,8 +18,8 @@ describe('new Fetcher', (test) => {
   const mockResponse = {
     userId: 1,
     id: 1,
-    title: "lorem ipsum",
-    body: "lorem ipsum"
+    title: 'lorem ipsum',
+    body: 'lorem ipsum'
   }
 
   test('should be defined', () => {

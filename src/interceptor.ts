@@ -9,6 +9,10 @@ export class Interceptor {
       this.fetch = window.fetch.bind(window)
     } else if (globalThis && globalThis.fetch) {
       this.fetch = globalThis.fetch.bind(globalThis)
+    } else {
+      throw new Error(
+        `The fetch method is used in an environment where it's not supported`
+      )
     }
   }
 
@@ -31,9 +35,9 @@ export class Interceptor {
 
       if (this.interceptors.size) {
         return response
-      } else {
-        return await response.json()
       }
+
+      return await response.json()
     })
 
     this.interceptors.forEach(({ response, responseError }) => {
