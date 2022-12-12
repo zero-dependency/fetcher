@@ -8,6 +8,7 @@ export default defineConfig({
   plugins: [dts()],
   build: {
     sourcemap: true,
+    minify: false,
     target: 'esnext',
     lib: {
       formats: [
