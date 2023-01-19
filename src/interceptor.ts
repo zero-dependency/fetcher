@@ -11,7 +11,7 @@ export class Interceptor {
       this.fetch = globalThis.fetch.bind(globalThis)
     } else {
       throw new Error(
-        `The fetch method is used in an environment where it's not supported`
+        'Could not find fetch. Make sure you are running in a browser or have a global fetch polyfill.'
       )
     }
   }
@@ -25,7 +25,6 @@ export class Interceptor {
 
     this.interceptors.forEach(({ request, requestError }) => {
       if (request || requestError) {
-        // @ts-ignore
         promise = promise.then((args) => request(...args), requestError)
       }
     })
@@ -42,7 +41,6 @@ export class Interceptor {
 
     this.interceptors.forEach(({ response, responseError }) => {
       if (response || responseError) {
-        // @ts-ignore
         promise = promise.then(response, responseError)
       }
     })
@@ -50,15 +48,11 @@ export class Interceptor {
     return promise
   }
 
-  register(
-    interceptor: FetcherInterceptor.Response | FetcherInterceptor.Request
-  ): void {
+  register(interceptor: FetcherInterceptor.Interceptor): void {
     this.interceptors.add(interceptor)
   }
 
-  unregister(
-    interceptor: FetcherInterceptor.Response | FetcherInterceptor.Request
-  ): void {
+  unregister(interceptor: FetcherInterceptor.Interceptor): void {
     this.interceptors.delete(interceptor)
   }
 

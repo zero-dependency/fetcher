@@ -33,7 +33,6 @@ export namespace FetcherInterceptor {
     request: (url: string, init: RequestInit) => [string, RequestInit]
     requestError?: (error: FetcherError<FetcherResponse>) => void
   }
-}
 
-export type FetcherInterceptors = FetcherInterceptor.Response &
-  FetcherInterceptor.Request
+  export type Interceptor = Response | Request
+}
