@@ -1,7 +1,7 @@
 export const METHODS = [
-  'GET',
-  'POST',
-  'PUT',
-  'PATCH',
-  'DELETE'
+  'get',
+  'post',
+  'put',
+  'patch',
+  'delete'
 ] as const

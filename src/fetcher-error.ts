@@ -2,10 +2,18 @@ export class FetcherError<T> extends Error {
   response: Response
   data: T
 
-  constructor({ response, data }: { response: Response; data: T }) {
-    super(response.statusText)
+  constructor({
+    message,
+    response,
+    data
+  }: {
+    message: string
+    response: Response
+    data: T
+  }) {
+    super(message)
 
-    this.name = 'FetcherError'
+    this.name = 'FetchError'
     this.response = response
     this.data = data
   }

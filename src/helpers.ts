@@ -1,5 +1,5 @@
 // https://github.com/axios/axios/blob/v1.x/lib/helpers/combineURLs.js
-export function combineURLs(baseURL: string, path: string): string {
+export function combineURLs(baseURL: string, path?: string): string {
   return path
     ? baseURL.replace(/\/+$/, '') + '/' + path.replace(/^\/+/, '')
     : baseURL
@@ -12,11 +12,7 @@ export function combineHeaders(...sources: HeadersInit[]): Headers {
     const headers = new Headers(source)
 
     for (const [key, value] of headers.entries()) {
-      if (value === undefined || value === null) {
-        delete result[key]
-      } else {
-        result[key] = value
-      }
+      result[key] = value
     }
   }
 

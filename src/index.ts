@@ -1,3 +1,3 @@
-export { Fetcher, fetcher } from './fetcher.js'
-export { FetcherError } from './fetcher-error.js'
-export type { FetcherInterceptor } from './types.js'
+export * from './fetcher.js'
+export * from './fetcher-error.js'
+export * from './types.js'

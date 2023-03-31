@@ -1,13 +1,15 @@
 import { METHODS } from './constants.js'
-import type { FetcherError } from './fetcher-error.js'
 
-// Fetcher
-export type FetcherRequestInitOptions = Pick<
+export type FetcherOptions = Pick<
   RequestInit,
   'headers' | 'credentials' | 'mode' | 'cache' | 'redirect' | 'referrerPolicy'
 >
 
-export type FetcherRequestInit = Omit<RequestInit, 'method'>
+export type FetcherParams = Record<string, string | number>
+
+export type FetcherRequestInit = Omit<RequestInit, 'method'> & {
+  params?: FetcherParams
+}
 
 export type FetcherRequestOptions = FetcherRequestInit & {
   method: FetcherMethods
@@ -19,20 +21,3 @@ export type FetcherRequest = <T>(
   path: string,
   options?: FetcherRequestInit
 ) => Promise<T>
-
-type FetcherResponse = Response
-
-// Interceptors
-export namespace FetcherInterceptor {
-  export interface Response {
-    response: (response: FetcherResponse) => void
-    responseError?: (error: FetcherError<FetcherResponse>) => void
-  }
-
-  export interface Request {
-    request: (url: string, init: RequestInit) => [string, RequestInit]
-    requestError?: (error: FetcherError<FetcherResponse>) => void
-  }
-
-  export type Interceptor = Response | Request
-}
