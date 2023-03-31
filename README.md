@@ -19,3 +19,18 @@ pnpm add @zero-dependency/fetcher
 ```
 
 ## Usage
+
+```ts
+import { Fetcher, fetcher } from '@zero-dependency/fetcher'
+
+interface Post {
+  id: number
+  userId: number
+  title: string
+  body: string
+}
+
+const api = new Fetcher('https://jsonplaceholder.typicode.com')
+const post = await api.get<Post>('/posts/1')
+console.log(post) // { id: 1, postId: 1, ... }
+```
