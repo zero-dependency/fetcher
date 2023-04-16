@@ -3,5 +3,7 @@ export const METHODS = [
   'post',
   'put',
   'patch',
-  'delete'
+  'delete',
+  'head',
+  'options'
 ] as const

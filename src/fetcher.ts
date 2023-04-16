@@ -17,6 +17,8 @@ export class Fetcher {
   put: FetcherRequest
   patch: FetcherRequest
   delete: FetcherRequest
+  head: FetcherRequest
+  options: FetcherRequest
 
   constructor(baseURL: string, options: FetcherOptions = {}) {
     this.#baseURL = baseURL
