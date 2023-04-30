@@ -36,6 +36,7 @@ describe('Fetcher', (test) => {
     expect(fetcher.delete).toBeDefined()
     expect(fetcher.request).toBeDefined()
     expect(fetcher.extends).toBeDefined()
+    expect(fetcher.options).toBeDefined()
   })
 
   test('should return a response', async () => {
