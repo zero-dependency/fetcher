@@ -52,7 +52,7 @@ export class Fetcher {
    */
   async request<T>(path: string, options?: FetcherRequestOptions): Promise<T> {
     if (options?.params) {
-      path = this.pathParams(path, options?.params)
+      path = this.pathParams(path, options.params)
       delete options.params
     }
 
