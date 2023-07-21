@@ -1,6 +1,6 @@
 {
   "name": "@zero-dependency/fetcher",
-  "version": "1.2.4",
+  "version": "1.2.5",
   "description": "Fetch wrapper",
   "type": "module",
   "types": "./dist/index.d.ts",
