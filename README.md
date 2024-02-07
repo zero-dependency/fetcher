@@ -32,5 +32,5 @@ interface Post {
 
 const api = new Fetcher('https://jsonplaceholder.typicode.com')
 const post = await api.get<Post>('/posts/1')
-console.log(post) // { id: 1, postId: 1, ... }
+console.log(post) // { id: 1, userId: 1, ... }
 ```
