@@ -1,5 +1,6 @@
 import { describe, expect, vi } from 'vitest'
 import createFetchMock from 'vitest-fetch-mock'
+
 import { FetcherError } from '../src/fetcher-error.js'
 import { Fetcher, fetcher } from '../src/fetcher.js'
 

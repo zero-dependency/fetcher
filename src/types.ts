@@ -15,7 +15,7 @@ export type FetcherRequestOptions = FetcherRequestInit & {
   method: FetcherMethods
 }
 
-export type FetcherMethods = typeof METHODS[number]
+export type FetcherMethods = (typeof METHODS)[number]
 
 export type FetcherRequest = <T>(
   path: string,
